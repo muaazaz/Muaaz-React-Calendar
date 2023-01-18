@@ -27,7 +27,6 @@ const Signup = () => {
                 const decodedToken = jwtDecode(data.token)
                 const id = decodedToken.id
                 if(id === data.user._id){
-                    console.log('run')
                     localStorage.setItem('token',data.token)
                     localStorage.setItem('email',data.user.email)
             
@@ -37,7 +36,6 @@ const Signup = () => {
                     setError((v)=>('user not found'))
                 }
             }else if(data.error){
-                console.log('error')
                 setError((v)=>(data.error))
             }
         }      

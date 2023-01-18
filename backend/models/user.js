@@ -68,7 +68,7 @@ userSchema.statics.verifyCredentials = async function(email,userName, password){
     }
 
     if(!usr){
-        throw new Error ('Email not found')
+        throw new Error ('Email or Username not found')
     }
     const isMatch =await bcrypt.compare(password, usr.password)
     if(!isMatch){

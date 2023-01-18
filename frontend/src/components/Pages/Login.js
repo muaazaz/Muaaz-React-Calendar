@@ -18,14 +18,17 @@ const Login = () => {
       body: JSON.stringify({ email, userName, password }),
     });
     const data = await res.json();
-    const decodedToken = jwtDecode(data.token);
-    const id = decodedToken.id;
-    if (data.user && id === data.user._id) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("email", data.user.email);
+    if (data.user) {
+      const decodedToken = jwtDecode(data.token);
+      const id = decodedToken.id;
+      if (data.user && id === data.user._id) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("email", data.user.email);
 
-      history.push("/");
-      window.location.reload();
+        history.push("/");
+        window.location.reload();
+
+      }
     } else {
       setError((v) => data.error);
     }
