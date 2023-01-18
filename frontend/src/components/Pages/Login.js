@@ -63,8 +63,9 @@ const Login = () => {
             handleSubmit();
           }}
         >
-          <label>Email:</label>
+          <label className="lbl">Email:</label>
           <input
+            className="inp"
             type="text"
             required
             maxLength={30}
@@ -75,8 +76,9 @@ const Login = () => {
               setEmail(e.target.value);
             }}
           />
-          <label>Password:</label>
+          <label className="lbl">Password:</label>
           <input
+            className="inp"
             type="password"
             required
             minLength={8}
@@ -93,7 +95,7 @@ const Login = () => {
             }}
           />
           {error && <h5 className="error">{error}</h5>}
-          <button>Log In</button>
+          <button className="create-btn">Log In</button>
           <br />
           <br />
           <a href="/login">Use User Name Instead</a>
@@ -107,8 +109,9 @@ const Login = () => {
             handleSubmit();
           }}
         >
-          <label>User Name:</label>
+          <label className="lbl">User Name:</label>
           <input
+            className="inp"
             type="text"
             required
             maxLength={15}
@@ -119,8 +122,9 @@ const Login = () => {
               setUserName(e.target.value);
             }}
           />
-          <label>Password:</label>
+          <label className="lbl" >Password:</label>
           <input
+            className="inp"
             type="password"
             required
             value={password}
@@ -137,7 +141,7 @@ const Login = () => {
             }}
           />
           {error && <h5 className="error">{error}</h5>}
-          <button>Log In</button>
+          <button className="create-btn">Log In</button>
           <br />
           <br />
           <a href="/login">Use Email Instead</a>

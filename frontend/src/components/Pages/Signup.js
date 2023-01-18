@@ -52,8 +52,8 @@ const Signup = () => {
                 e.preventDefault()
                 handleSubmit()
             }}>
-                <label>First Name:</label>
-                <input type="text"
+                <label className="lbl" >First Name:</label>
+                <input className="inp" type="text"
                     required
                     value={firstName}
                     maxLength={10}
@@ -63,8 +63,8 @@ const Signup = () => {
                         setFname(e.target.value)
                     }}
                 />
-                <label>Last Name:</label>
-                <input type="text"
+                <label className="lbl">Last Name:</label>
+                <input className="inp" type="text"
                     required
                     value={lastName}
                     maxLength={10}
@@ -74,8 +74,8 @@ const Signup = () => {
                         setLname(e.target.value)
                     }}
                 />
-                <label>User Name:</label>
-                <input type="text"
+                <label className="lbl">User Name:</label>
+                <input className="inp" type="text"
                     required
                     value={userName}
                     maxLength={15}
@@ -85,14 +85,14 @@ const Signup = () => {
                         setUserName(e.target.value)
                     }}
                 />
-                <label>Date Of Birth:</label>
-                <input type='date'
+                <label className="lbl" >Date Of Birth:</label>
+                <input className="inp" type='date'
                     value={birthdate}
                     onChange={handleChange}
                     max={current}
                 />
-                <label>Email:</label>
-                <input type="text"
+                <label className="lbl">Email:</label>
+                <input className="inp" type="text"
                     required
                     value={email}
                     maxLength={30}  
@@ -102,8 +102,8 @@ const Signup = () => {
                         setEmail(e.target.value)
                     }}
                 />
-                <label>Password:</label>
-                <input type="password"
+                <label className="lbl">Password:</label>
+                <input className="inp" type="password"
                     required
                     value={password}
                     minLength={8}
@@ -120,7 +120,7 @@ const Signup = () => {
                 />
 
                 {error && <h5 className="error">{error}</h5>}
-                <button>Sign Up</button>
+                <button className="create-btn">Sign Up</button>
             </form>
         </div>
     );
