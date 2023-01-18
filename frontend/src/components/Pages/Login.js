@@ -89,7 +89,7 @@ const Login = () => {
             placeholder="please enter your password"
             onChange={(e) => {
               if (e.target.value.length < 8) {
-                setError((v) => "paswword is wrong");
+                setError((v) => "pasword is wrong");
                 setPass((p) => e.target.value);
               } else {
                 setError((v) => "");

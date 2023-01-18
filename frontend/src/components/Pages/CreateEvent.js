@@ -6,6 +6,7 @@ import { Autocomplete, TextField } from "@mui/material";
 
 const CreateEvent = () => {
   var Arr = [];
+  var unique = [];
 
   const history = useHistory();
   const [item, setItem] = useState("");
@@ -37,6 +38,12 @@ const CreateEvent = () => {
         data.results.forEach((element) => {
           Arr.push(element.name);
         });
+
+        Arr.forEach(element => {
+          if (!unique.includes(element)) {
+              unique.push(element);
+          }
+      });
       });
     });
   };
@@ -106,7 +113,7 @@ const CreateEvent = () => {
           />
           <Autocomplete
             disablePortal
-            options={Arr && Arr}
+            options={unique}
             sx={{ width: "100%", padding: "0" }}
             renderInput={(params) => <TextField {...params} label="Location" />}
             onChange={(e)=>{

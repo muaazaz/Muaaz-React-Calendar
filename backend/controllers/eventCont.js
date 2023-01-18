@@ -7,15 +7,18 @@ const create_event = async(req, res)=>{
         const event = new Event(req.body)
         await event.save()
         res.send({event})
-    } catch (e) {
-        const error = e.mesaage
-        res.send({error})
+    } catch (err) {
+        var error = err.message
+        if(error.includes('start')){
+           error = 'Enter a unique Start time'
+        }
+        res.send({error})  
     }
 }
 const get_events = async(req, res)=>{
 
     try {
-        const events =await Event.find({owner: req.user._id}).sort({strt:'asc'})
+        const events =await Event.find({owner: req.user._id}).sort({strt:1})
         res.send({events})
     } catch (e) {
         const error = e.mesaage

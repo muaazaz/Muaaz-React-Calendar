@@ -10,7 +10,6 @@ const CalendarProvider = ({ children }) => {
   var mrg = 0;
   var start1 = 0;
   var start2 = 0;
-  var isvalid = false;
   var isOverlap = false;
   var counter = 0;
   //For generating the timetable dinamically
@@ -164,7 +163,8 @@ const CalendarProvider = ({ children }) => {
       item: item.innerHTML,
       loc: loc.innerHTML,
     };
-
+    //Storing events in an array as an object
+    storeevents(evntObj);
     //To manage overlapping
     if (count > 1) {
       isOverlap = false;
@@ -172,8 +172,7 @@ const CalendarProvider = ({ children }) => {
     } else {
       strttime.appendChild(evnt);
     }
-    //Storing events in an array as an object
-    storeevents(evntObj);
+
     tim = 0;
     count++;
   }
@@ -199,13 +198,16 @@ const CalendarProvider = ({ children }) => {
 
   //Checking where ovelap occurs
   function overlapandStore(evnt, div) {
-    arr.forEach((element) => {
-      if (element.end - evnt.start > 0 && element.start !== evnt.start) {
-        overlap(evnt, div, element);
-        isOverlap = true;
-      } else if (!isOverlap) {
-        noOverlap(evnt, div);
-      }
+    let j = 0;
+    arr.forEach(() => {
+      if (arr[j].end - evnt.start > 0 && arr[j].start !== evnt.start && j < arr.length){
+            overlap(evnt, div, arr[j]);
+            isOverlap = true;
+          }else if (j< arr.length && isOverlap){
+            j++;
+          }else{
+            noOverlap(evnt, div);
+          }
     });
   }
   //overlap or not selecting div accordingly
@@ -214,7 +216,6 @@ const CalendarProvider = ({ children }) => {
     tim = document.getElementById(element.start.toString());
     rmvOver(evnt, div);
     tim.appendChild(div);
-    return;
   }
   function noOverlap(evnt, div) {
     tim1 = evnt.start;
@@ -244,8 +245,6 @@ const CalendarProvider = ({ children }) => {
       start = convert(start, tm1);
       end = convert(end, tm2);
 
-      check(start);
-      if (isvalid) {
         start1 = start.split(".");
         if (start1[0] - 12 > 0) {
           start2 = start1[0] - 12;
@@ -258,24 +257,7 @@ const CalendarProvider = ({ children }) => {
           start2 = start2.toString() + ":00";
         }
         genevents(start, end, item, loc, id);
-      } else {
-        alert("More than two events can not start at the same time!.");
-      }
     });
-  }
-
-  //To control event spaming
-  function check(start) {
-    arr.forEach((element) => {
-      if (element.start === start) {
-        counter++;
-      }
-    });
-    if (counter >= 2) {
-      isvalid = false;
-    } else {
-      isvalid = true;
-    }
   }
 
   //To check time for am or pm and converting it in 24 hours format

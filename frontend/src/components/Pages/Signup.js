@@ -1,11 +1,13 @@
 import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import PasswordChecklist from "react-password-checklist"
 
 const Signup = () => {
     const history = useHistory()
     const [email, setEmail] = useState('')
-    const [password, setPass] = useState('')
+    const [password, setPass] = useState("")
+    const [passwordAgain, setPasswordAgain] = useState("")
     const [error, setError] = useState('')
     const [birthdate, setBirth] = useState()
     const [firstName, setFname] = useState('')
@@ -14,31 +16,31 @@ const Signup = () => {
     const current = new Date().toISOString().split("T")[0]
 
     const handleSubmit = async () => {
-        if(firstName === lastName){
-            setError((v)=>('First-name and Last-name cannot be same'))
-        }else{
+        if (firstName === lastName) {
+            setError((v) => ('First-name and Last-name cannot be same'))
+        } else {
             const res = await fetch('/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({firstName,lastName, userName, birthdate, email, password })
+                body: JSON.stringify({ firstName, lastName, userName, birthdate, email, password })
             })
             const data = await res.json()
-            if(data.user){
+            if (data.user) {
                 const decodedToken = jwtDecode(data.token)
                 const id = decodedToken.id
-                if(id === data.user._id){
-                    localStorage.setItem('token',data.token)
-                    localStorage.setItem('email',data.user.email)
-            
+                if (id === data.user._id) {
+                    localStorage.setItem('token', data.token)
+                    localStorage.setItem('email', data.user.email)
+
                     history.push('/')
                     window.location.reload()
-                }else{
-                    setError((v)=>('user not found'))
+                } else {
+                    setError((v) => ('user not found'))
                 }
-            }else if(data.error){
-                setError((v)=>(data.error))
+            } else if (data.error) {
+                setError((v) => (data.error))
             }
-        }      
+        }
     }
     const handleChange = (e) => {
         setBirth((b) => (e.target.value))
@@ -93,7 +95,7 @@ const Signup = () => {
                 <input className="inp" type="text"
                     required
                     value={email}
-                    maxLength={30}  
+                    maxLength={30}
                     placeholder='please enter an email that is unique'
                     onChange={(e) => {
                         setError((v) => (''))
@@ -105,20 +107,36 @@ const Signup = () => {
                     required
                     value={password}
                     minLength={8}
-                    placeholder='please enter a password more than 8 characters long'
+                    placeholder='please enter a password'
                     onChange={(e) => {
-                        if(e.target.value.length < 8){
-                            setError((v)=>('Pasword must be 8 characters long at minimum'))
-                            setPass(e.target.value)
-                        }else{
-                            setError((v) => (''))
-                            setPass(e.target.value)
+                        setError((v) => (''))
+                        setPass(e.target.value)
+                    }}
+                />
+                <label className="lbl">Confirm Password:</label>
+                <input
+                    className="inp"
+                    type="password"
+                    onChange={e => setPasswordAgain(e.target.value)}
+                    placeholder='please confirm your password'
+                />
+
+                <PasswordChecklist
+                    rules={["minLength", "specialChar", "number", "capital", "match"]}
+                    minLength={8}
+                    value={password}
+                    valueAgain={passwordAgain}
+                    onChange={(isValid) => {
+                        const btn = document.querySelector('.sign')
+                        if (isValid) {
+                            btn.disabled = false
+                        } else {
+                            btn.disabled = true
                         }
                     }}
                 />
-
                 {error && <h5 className="error">{error}</h5>}
-                <button className="create-btn">Sign Up</button>
+                <button disabled className="create-btn sign">Sign Up</button>
             </form>
         </div>
     );

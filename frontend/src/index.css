@@ -138,6 +138,10 @@ body {
   cursor: pointer;
   margin-top: 20px;
 }
+.create-btn:disabled{
+  background-color: grey;
+  cursor:default;
+}
 .create a{
   color: darkgrey;
   text-decoration: none;

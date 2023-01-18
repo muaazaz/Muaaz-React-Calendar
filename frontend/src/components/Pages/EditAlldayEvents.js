@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 const EditAllday = () => {
     var Arr = [];
+    var unique = [];
     const history = useHistory()
     const [item, setItem] = useState('')
     const [location, setLoc] = useState('')
@@ -31,6 +32,11 @@ const EditAllday = () => {
             res.json().then((data) => {
                 data.results.forEach((element) => {
                     Arr.push(element.name);
+                });
+                Arr.forEach(element => {
+                    if (!unique.includes(element)) {
+                        unique.push(element);
+                    }
                 });
             });
         });
@@ -98,7 +104,7 @@ const EditAllday = () => {
                 />
                  <Autocomplete
                     disablePortal
-                    options={Arr && Arr}
+                    options={unique}
                     value={location}
                     sx={{ width: "100%", padding: "0" }}
                     renderInput={(params) => <TextField {...params} label="Location" />}

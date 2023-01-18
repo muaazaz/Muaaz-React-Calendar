@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 const EditEvents = () => {
   var Arr =[]
+  var unique = []
   const { id } = useParams();
   const history = useHistory();
   const [event, setEvent] = useState();
@@ -38,6 +39,11 @@ const EditEvents = () => {
         data.results.forEach((element) => {
           Arr.push(element.name);
         });
+        Arr.forEach(element => {
+          if (!unique.includes(element)) {
+              unique.push(element);
+          }
+      });
       });
     });
   };
@@ -154,7 +160,7 @@ const EditEvents = () => {
             <Autocomplete
             disablePortal
             value={location}
-            options={Arr && Arr}
+            options={unique}
             sx={{ width: "100%", padding: "0" }}
             renderInput={(params) => <TextField {...params} label="Location" />}
             onChange={(e)=>{
