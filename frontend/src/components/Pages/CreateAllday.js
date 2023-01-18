@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 import { Autocomplete, TextField } from "@mui/material";
 
 const CreateAllday = () => {
-    const Arr = [];
+    var Arr = [];
     const history = useHistory()
     const [name, setName] = useState('')
     const [location, setLoc] = useState('')
@@ -89,7 +89,7 @@ const CreateAllday = () => {
                     sx={{ width: "100%", padding: "0" }}
                     renderInput={(params) => <TextField {...params} label="Location" />}
                     onChange={(e) => {
-                        setLoc(e.target.value);
+                        setLoc(e.target.textContent);
                     }}
                 />
 

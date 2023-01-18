@@ -1,7 +1,9 @@
+import { Autocomplete, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 const EditEvents = () => {
+  var Arr =[]
   const { id } = useParams();
   const history = useHistory();
   const [event, setEvent] = useState();
@@ -14,6 +16,31 @@ const EditEvents = () => {
   var isValid = false;
   var strt = "";
   var ed = "";
+
+  const createOptions = () => {
+    const where = encodeURIComponent(
+      JSON.stringify({
+        name: {
+          $exists: true,
+        },
+      })
+    );
+    fetch(
+      `https://parseapi.back4app.com/classes/City?limit=1000&order=name&where=${where}`,
+      {
+        headers: {
+          "X-Parse-Application-Id": "q1QfxhDv1KLM5OPzUFzZRIvYERUAFLWEWX9r053J", // This is the fake app's application id
+          "X-Parse-Master-Key": "POcTYBgrQ52WGn2lJrcQrYwFFM44uhQ2eqmoy8hS", // This is the fake app's readonly master key
+        },
+      }
+    ).then((res) => {
+      res.json().then((data) => {
+        data.results.forEach((element) => {
+          Arr.push(element.name);
+        });
+      });
+    });
+  };
 
   const setPrevious = (event) => {
     setEvent(event);
@@ -38,7 +65,9 @@ const EditEvents = () => {
       });
       setOnce(false);
     }
-  });
+    createOptions()
+
+  },[Arr]);
 
   const checkErrors = () => {
     const start1 = start.split(":");
@@ -108,9 +137,10 @@ const EditEvents = () => {
       {event && (
         <form onSubmit={handleSubmit}>
           <div className="em">
-            <label htmlFor="name">Name:</label>
+            <label className="lbl" htmlFor="name">Name:</label>
 
             <input
+              className="inp"
               type="text"
               id="name"
               name="name"
@@ -121,24 +151,23 @@ const EditEvents = () => {
                 setItem((i) => e.target.value);
               }}
             />
-            <label htmlFor="location">Location:</label>
-            <input
-              type="text"
-              id="location"
-              name="location"
-              required
-              placeholder="please enter an location for event"
-              value={location}
-              onChange={(e) => {
-                setLoc((l) => e.target.value);
-              }}
-            />
+            <Autocomplete
+            disablePortal
+            value={location}
+            options={Arr && Arr}
+            sx={{ width: "100%", padding: "0" }}
+            renderInput={(params) => <TextField {...params} label="Location" />}
+            onChange={(e)=>{
+              setLoc(e.target.textContent);
+            }}
+          />
           </div>
           <div className="pass">
 
-            <label htmlFor="start_time">Start Time:</label>
+            <label className="lbl" htmlFor="start_time">Start Time:</label>
 
             <select
+            className="slct"
               required
               value={start}
               onChange={(e) => {
@@ -176,7 +205,7 @@ const EditEvents = () => {
 
             <select
               required
-              className="end-time"
+              className="end-time slct"
               disabled
               onChange={(e) => {
                 setError((e) => (undefined))
@@ -211,7 +240,7 @@ const EditEvents = () => {
           </div>
 
           {error && <h5 className="error">{error}</h5>}
-          <button>Edit Event</button>
+          <button className="create-btn">Edit Event</button>
         </form>
       )}
     </div>

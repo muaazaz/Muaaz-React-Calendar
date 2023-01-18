@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 import { Autocomplete, TextField } from "@mui/material";
 
 const CreateEvent = () => {
-  const Arr = [];
+  var Arr = [];
 
   const history = useHistory();
   const [item, setItem] = useState("");
@@ -110,7 +110,7 @@ const CreateEvent = () => {
             sx={{ width: "100%", padding: "0" }}
             renderInput={(params) => <TextField {...params} label="Location" />}
             onChange={(e)=>{
-              setLoc(e.target.value);
+              setLoc(e.target.textContent);
             }}
           />
         </div>
