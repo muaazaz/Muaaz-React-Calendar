@@ -1,18 +1,18 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./components/Pages/Home";
 import Navbar from "./components/Navbar";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
-import NotFound from "./components/404";
-import CreateEvent from "./components/CreateEvent";
-import CreateAllday from "./components/CreateAllday";
-import Events from "./components/Events";
-import EditEvents from "./components/EditEvents";
-import EditAllday from "./components/EditAlldayEvents";
+import Signup from "./components/Pages/Signup";
+import Login from "./components/Pages/Login";
+import Logout from "./components/Pages/Logout";
+import NotFound from "./components/Pages/404";
+import CreateEvent from "./components/Pages/CreateEvent";
+import CreateAllday from "./components/Pages/CreateAllday";
+import EditEvents from "./components/Pages/EditEvents";
+import EditAllday from "./components/Pages/EditAlldayEvents";
 import PublicRoutes from "./components/Routes/Public";
 import PrivateRoutes from "./components/Routes/Private";
 import CalendarProvider from "./components/Context/CalendarContext";
+import Events from "./components/Pages/Events"
 
 function App() {
   return (

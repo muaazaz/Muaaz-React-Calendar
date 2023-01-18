@@ -103,30 +103,31 @@ body {
   padding: 40px;
   box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.create label{
+.lbl{
   text-align: left;
   display: block;
-  margin-top: 50px;
   color:teal;
+  margin-top: 50px;
 }
 .create h2{
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 30px;
 }
-.create input, .create select{
+.inp, .slct{
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
   box-sizing: border-box;
   display: block;
+  margin-bottom: 50px;
 }
 .create > h1{
   color: #f1356d;
   font-size: xx-large;
 }
-.create button{
+.create-btn{
   background:#f1356d;
   color: #fff;
   border: 0;

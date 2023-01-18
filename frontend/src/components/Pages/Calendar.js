@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { CalendarContext } from "./Context/CalendarContext";
+import { CalendarContext } from "../Context/CalendarContext";
 
 const Calendar = (props) => {
 const [Daily, setDaily] = useState()

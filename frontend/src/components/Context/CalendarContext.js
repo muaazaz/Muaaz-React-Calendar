@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import { useHistory } from "react-router-dom";
 
 export const CalendarContext = createContext();
 
@@ -14,7 +13,6 @@ const CalendarProvider = ({ children }) => {
   var isvalid = false;
   var isOverlap = false;
   var counter = 0;
-  const history = useHistory();
   //For generating the timetable dinamically
   function createTime() {
     for (let i = 9; i <= 20; i += 0.5) {
@@ -133,8 +131,6 @@ const CalendarProvider = ({ children }) => {
 
     buttons.appendChild(dlt);
     buttons.appendChild(edt);
-
-    // buttons.style.display = 'none'
 
     evnt.setAttribute("class", "events");
     time.setAttribute("class", "tim");

@@ -9,7 +9,6 @@ const genToken = (id)=>{
 }
 
 const post_signup=async (req, res)=>{
-    console.log('signup')
     try {
         const user = new User(req.body)
         await user.save()

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 
 const EditAllday = () => {
     const history = useHistory()

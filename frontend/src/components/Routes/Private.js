@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom";
 import { useMemo, useState } from "react";
-import Login from "../Login";
+import Login from "../Pages/Login";
 const PrivateRoutes = ({ path, component }) => {
   const token = localStorage.getItem("token");
   const [logIn, setLogIn] = useState(false);
